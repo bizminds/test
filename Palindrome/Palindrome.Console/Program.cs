@@ -7,9 +7,9 @@ namespace Palindrome
         static void Main(string[] args)
         {
             var checker = new PalindromeChecker();
-
-            var result = checker.IsPalindrome("p'eep");
-            Console.WriteLine(result);
+            string word = "De-leveled";
+            var result = checker.IsPalindrome(word);
+            Console.WriteLine("Result for " +  word + " is: {0}",result);
         }
     }
 }
