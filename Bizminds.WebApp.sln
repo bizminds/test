@@ -5,7 +5,7 @@ VisualStudioVersion = 15.0.28307.168
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bizminds.WebApp", "Bizminds.WebApp\Bizminds.WebApp.csproj", "{F088299C-AD5A-45C8-9161-C041E4E5A546}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bizminds.Models", "..\Bizminds.Models\Bizminds.Models.csproj", "{583EB10F-62AA-4E09-9971-C2B9516037D3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bizminds.Models", "Bizminds.Models\Bizminds.Models.csproj", "{583EB10F-62AA-4E09-9971-C2B9516037D3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
