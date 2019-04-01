@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Configuration;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -59,14 +60,14 @@ namespace DemoAzureStorage.Controllers
             {
                 return BadRequest("An error has occured while uploading your file. Please try again.");
             }
-
+            var uploadedFileName = provider.Contents.FirstOrDefault()?.Headers.ContentDisposition.FileName.Replace("\"", string.Empty);
             var fileLog = new FileUploadLogItem()
             {
-                Location = string.Empty,
+                Location = Request.RequestUri.AbsoluteUri,
                 Size = Request.Content.Headers.ContentLength.HasValue ? Request.Content.Headers.ContentLength.Value : 0,
-                FileExtension = string.Empty,
-                ContentType = Request.Content.Headers.ContentType.MediaType, 
-                AzureFilePath = "test",
+                FileExtension = Path.GetExtension(uploadedFileName),
+                ContentType = provider.FileData.FirstOrDefault()?.Headers.ContentType.ToString(), 
+                AzureFilePath = provider.UploadedPath,
                 Name = filename,
                 TimeStamp = DateTime.UtcNow
             };
