@@ -1,4 +1,9 @@
 ﻿$(document).ready(function () {
+    $(document).ajaxError(function (e, jqxhr, settings, exception) {
+        e.stopPropagation();
+        if (jqxhr != null)
+            alert(jqxhr.responseText);
+    });
     $('input[type=datetime]').datepicker({
         dateFormat: "dd/M/yy",
         changeMonth: true,

@@ -1,4 +1,5 @@
-﻿using System.Web;
+﻿using Bizminds.WebApp.Helper;
+using System.Web;
 using System.Web.Mvc;
 
 namespace Bizminds.WebApp
@@ -7,7 +8,7 @@ namespace Bizminds.WebApp
     {
         public static void RegisterGlobalFilters(GlobalFilterCollection filters)
         {
-            filters.Add(new HandleErrorAttribute());
+            filters.Add(new HandleExceptionAttribute());
         }
     }
 }
