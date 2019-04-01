@@ -27,11 +27,14 @@
         </div>
     </div>
     <div class="container body-content">
+
         @RenderBody()
-        <hr />
+
 
     </div>
+    <div id="errorMessage" style="display:none" class="alert alert-danger text-center">
 
+    </div>
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/jqueryui")
 
