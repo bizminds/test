@@ -12,6 +12,8 @@ namespace DemoAzureStorage.Infrastructure
     {
         private readonly CloudBlobContainer _blobContainer;
 
+        public string UploadedPath;
+
         public AzureStorageMultipartFormDataStreamProvider(CloudBlobContainer blobContainer) : base("azure")
         {
             _blobContainer = blobContainer;
@@ -35,7 +37,11 @@ namespace DemoAzureStorage.Infrastructure
 
             this.FileData.Add(new MultipartFileData(headers, blob.Name));
 
-            return blob.OpenWrite();
+            var stream = blob.OpenWrite();
+
+            UploadedPath = blob.Uri.AbsoluteUri;
+
+            return stream;
         }
     }
 }
