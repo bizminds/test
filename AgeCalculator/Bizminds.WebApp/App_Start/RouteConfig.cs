@@ -16,7 +16,7 @@ namespace Bizminds.WebApp
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Palindrome", action = "Index", id = UrlParameter.Optional }
+                defaults: new { controller = "Calculator", action = "Age", id = UrlParameter.Optional }
             );
         }
     }
