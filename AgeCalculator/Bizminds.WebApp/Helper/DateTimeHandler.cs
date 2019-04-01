@@ -16,7 +16,7 @@ namespace Bizminds.WebApp.Helper
             if (toDate < fromDate)
                 throw new Exception("To date should be greater than From date");
             DateDifference difference = new DateDifference();
-            difference.Years = new DateTime(DateTime.Now.Subtract(fromDate).Ticks).Year - 1;
+            difference.Years = new DateTime(toDate.Subtract(fromDate).Ticks).Year - 1;
             DateTime pastYearDate = fromDate.AddYears(difference.Years);
             int months = 0;
             for (int i = 1; i <= 12; i++)
