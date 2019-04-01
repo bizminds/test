@@ -1,8 +1,12 @@
 ﻿$(document).ready(function () {
     $(document).ajaxError(function (e, jqxhr, settings, exception) {
         e.stopPropagation();
-        if (jqxhr != null)
-            alert(jqxhr.responseText);
+        var message = 'Oops! somthing went wrong on the server';
+        if (jqxhr != null && jqxhr.responseJSON != null && jqxhr.responseJSON.Message) {
+            message = 'Oops! ' + jqxhr.responseJSON.Message;
+        }
+
+        $('#errorMessage').html(message).fadeIn().delay(5000).fadeOut();
     });
     $('input[type=datetime]').datepicker({
         dateFormat: "dd/M/yy",
