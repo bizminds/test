@@ -62,10 +62,10 @@ namespace DemoAzureStorage.Controllers
 
             var fileLog = new FileUploadLogItem()
             {
-                Location = "test",
-                Size = 0,
-                FileExtension = "test",
-                ContentType = "pdf",
+                Location = string.Empty,
+                Size = Request.Content.Headers.ContentLength.HasValue ? Request.Content.Headers.ContentLength.Value : 0,
+                FileExtension = string.Empty,
+                ContentType = Request.Content.Headers.ContentType.MediaType, 
                 AzureFilePath = "test",
                 Name = filename,
                 TimeStamp = DateTime.UtcNow

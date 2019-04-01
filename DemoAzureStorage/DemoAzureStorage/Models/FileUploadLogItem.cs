@@ -11,7 +11,7 @@ namespace DemoAzureStorage.Models
     {
         public string Name { get; set; }
 
-        public decimal Size { get; set; }
+        public long Size { get; set; }
 
         public string ContentType { get; set; }
 
