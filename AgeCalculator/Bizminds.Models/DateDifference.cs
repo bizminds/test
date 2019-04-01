@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Bizminds.Models
 {
-    public class Age
+    public class DateDifference
     {
         public int Years { get; set; }
         public int Months { get; set; }

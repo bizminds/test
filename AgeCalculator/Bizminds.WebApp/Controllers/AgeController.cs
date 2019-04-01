@@ -20,7 +20,7 @@ namespace Bizminds.WebApp.Controllers
         public ActionResult Age(AgeCalculatorRequest request)
         {
             
-            Age age = (new AgeCalculator(request.DateOfBirth)).GetAge();
+            DateDifference age = request.DateOfBirth.DateDifference(DateTime.Now);
 
             return Json(new {Result = $"Age: {age.Years} Year(s) {age.Months} Month(s) {age.Weeks} Weeks {age.Days} Day(s) {age.Hours} Hour(s) {age.Minutes} Minutes {age.Seconds} Second(s)" });
         }
