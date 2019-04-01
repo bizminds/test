@@ -41,6 +41,9 @@ namespace DemoAzureStorage.Util
         {
             try
             {
+                entity.RowKey = Guid.NewGuid().ToString();
+                entity.PartitionKey = entity.FileExtension;
+                entity.Timestamp = DateTime.Now;
                 var insertOperation = TableOperation.Insert(entity);
                 table.Execute(insertOperation);
             }

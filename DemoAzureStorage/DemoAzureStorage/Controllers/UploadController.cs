@@ -63,6 +63,7 @@ namespace DemoAzureStorage.Controllers
             var fileLog = new FileUploadLogItem()
             {
                 Location = "test",
+                Size = 0,
                 FileExtension = "test",
                 ContentType = "pdf",
                 AzureFilePath = "test",
