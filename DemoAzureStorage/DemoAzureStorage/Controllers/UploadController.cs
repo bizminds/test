@@ -6,6 +6,8 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
 using DemoAzureStorage.Infrastructure;
+using DemoAzureStorage.Models;
+using DemoAzureStorage.Util;
 using Microsoft.WindowsAzure.Storage;
 using Microsoft.WindowsAzure.Storage.Auth;
 using Microsoft.WindowsAzure.Storage.Blob;
@@ -15,7 +17,7 @@ namespace DemoAzureStorage.Controllers
     [RoutePrefix("api/upload")]
     public class UploadController : ApiController
     {
-        private const string Container = "images";
+        private const string Container = "files";
 
         [HttpPost, Route("")]
         public async Task<IHttpActionResult> UploadFile()
@@ -30,9 +32,18 @@ namespace DemoAzureStorage.Controllers
             var storageAccount = new CloudStorageAccount(new StorageCredentials(accountName, accountKey), true);
             CloudBlobClient blobClient = storageAccount.CreateCloudBlobClient();
 
-            CloudBlobContainer imagesContainer = blobClient.GetContainerReference(Container);
-            var provider = new AzureStorageMultipartFormDataStreamProvider(imagesContainer);
+            CloudBlobContainer filesContainer = blobClient.GetContainerReference(Container);
+            var provider = new AzureStorageMultipartFormDataStreamProvider(filesContainer);
+            if (await filesContainer.CreateIfNotExistsAsync())
+            {
+                await filesContainer.SetPermissionsAsync(new
+                   BlobContainerPermissions
+                {
+                    PublicAccess =
+                   BlobContainerPublicAccessType.Blob
+                });
 
+            }
             try
             {
                 await Request.Content.ReadAsMultipartAsync(provider);
@@ -48,6 +59,17 @@ namespace DemoAzureStorage.Controllers
             {
                 return BadRequest("An error has occured while uploading your file. Please try again.");
             }
+
+            var fileLog = new FileUploadLogItem()
+            {
+                Location = "test",
+                FileExtension = "test",
+                ContentType = "pdf",
+                AzureFilePath = "test",
+                Name = filename,
+                TimeStamp = DateTime.UtcNow
+            };
+            new TableManager(storageAccount).InsertEntity(fileLog);
 
             return Ok($"File: {filename} has successfully uploaded");
         }
