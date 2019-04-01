@@ -1,4 +1,5 @@
 using System;
+using System.Text.RegularExpressions;
 
 namespace Palindrome
 {
@@ -6,7 +7,8 @@ namespace Palindrome
     {
         public bool IsPalindrome(string InputStr) {
 
-            var chars = InputStr.ToLower().ToCharArray();
+            var filteredString = RemoveSpecialCharacters(InputStr.ToLower());
+            var chars = filteredString.ToCharArray();
             var length = chars.Length;
 
             for(int index = 0; index < length / 2; index++)
@@ -19,5 +21,11 @@ namespace Palindrome
             return true;
 
         }
+
+        private static string RemoveSpecialCharacters(string str)
+        {
+            return Regex.Replace(str, "[^a-z]+", "", RegexOptions.Compiled);
+        }
+
     }
 }
